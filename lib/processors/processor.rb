@@ -34,7 +34,7 @@ module Processors
     end
 
     def stdout_logger
-      @stdoud_logger ||= ::Loggers::StdoutLogger.new unless silent?
+      @stdout_logger ||= ::Loggers::StdoutLogger.new unless silent?
     end
 
     def output_logger
@@ -48,14 +48,14 @@ module Processors
     def run
       begin
         parsed_input = input_parser.parse
-        process_input
+        process_input(parsed_input)
         log_output
       rescue ::Parsers::Errors::FailFastError => e
         puts "Parser failed fast on #{e.message}"
       end
     end
 
-    def process_input; end
+    def process_input(parsed_input); end
 
     def log_output
       output_logger.log(@processor_result) if output_logger
