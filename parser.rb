@@ -29,7 +29,7 @@ options = Parser.new do |p|
    p.version = "1.0"
    p.option :input, "input file name", default: "webserver.log"
    p.option :input_format, "input file format", default: "log", value_in_set: ['log', 'csv']
-   p.option :output, "optional output file (instead of STDOUT)"
+   p.option :output, "optional output file (instead of STDOUT)", default: "undefined"
    p.option :output_format, "output file format", default: "log", value_in_set: ['log', 'csv']
    p.option :processor, "select processor", default: "Processors::DefaultProcessor", value_in_set: ['Processors::DefaultProcessor']
    p.option :silent, "do not log into STDOUT"

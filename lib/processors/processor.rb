@@ -22,7 +22,7 @@ module Processors
     end
 
     def output?
-      !!@options[:output]
+      !(@options[:output] == "undefined")
     end
 
     def silent?

@@ -6,7 +6,7 @@ describe Processors::Processor do
 
   describe '#input' do
     context "with input param" do
-      let (:options) { {silent: false, output: nil, fail_fast: false, input: 'test.log'} } 
+      let (:options) { {silent: false, output: "undefined", fail_fast: false, input: 'test.log'} } 
       it { expect(subject.input).to eq('test.log') }
     end
   end
@@ -19,20 +19,20 @@ describe Processors::Processor do
     end
 
     context "without output param" do
-      let (:options) { {silent: false, output: nil, fail_fast: false} }
-      it { expect(subject.output).to be_nil }
+      let (:options) { {silent: false, output: "undefined", fail_fast: false} }
+      it { expect(subject.output).to eq("undefined") }
       it { expect(subject.output?).to be_falsey }
     end
   end
 
   describe '#stdout_logger' do
     context "when not silent" do
-      let (:options) { {silent: false, output: nil, fail_fast: false} } 
+      let (:options) { {silent: false, output: "undefined", fail_fast: false} } 
       it { expect(subject.stdout_logger).to be_an_instance_of(Loggers::StdoutLogger) }
     end
 
     context "when silent" do
-      let (:options) { {silent: true, output: nil, fail_fast: false} } 
+      let (:options) { {silent: true, output: "undefined", fail_fast: false} } 
       it { expect(subject.stdout_logger).to be_nil }
     end
   end
@@ -51,20 +51,20 @@ describe Processors::Processor do
     end
 
     context "when output is empty" do
-      let (:options) { {silent: false, output: nil, fail_fast: false, output_format: 'log'} } 
+      let (:options) { {silent: false, output: "undefined", fail_fast: false, output_format: 'log'} } 
       it { expect(subject.output_logger).to be_nil }
     end
   end
 
   describe '#input_logger' do
     context "when format is log" do
-      let (:options) { {silent: false, output: nil, fail_fast: false, input: 'webserver.log', input_format: 'log'} } 
+      let (:options) { {silent: false, output: "undefined", fail_fast: false, input: 'webserver.log', input_format: 'log'} } 
       it { expect(subject.input_parser).to be_an_instance_of(Parsers::DefaultParser) }
       it { expect(subject.input_parser.file_name).to eq('webserver.log') }
     end
 
     context "when format is csv" do
-      let (:options) { {silent: false, output: nil, fail_fast: false, input: 'webserver.csv', input_format: 'csv'} } 
+      let (:options) { {silent: false, output: "undefined", fail_fast: false, input: 'webserver.csv', input_format: 'csv'} } 
       it { expect(subject.input_parser).to be_an_instance_of(Parsers::CsvParser) }
       it { expect(subject.input_parser.file_name).to eq('webserver.csv') }
     end
@@ -90,7 +90,7 @@ describe Processors::Processor do
       end
 
       context "and no output file" do
-        let (:options) { {silent: false, output: nil, fail_fast: false, input_format: 'log', output_format: 'log'} }
+        let (:options) { {silent: false, output: "undefined", fail_fast: false, input_format: 'log', output_format: 'log'} }
 
         it "processes the file and logs the output to stdout" do
           expect_any_instance_of(Parsers::DefaultParser).to receive(:parse)
@@ -116,7 +116,7 @@ describe Processors::Processor do
       before do
         allow_any_instance_of(Parsers::DefaultParser).to receive(:parse).and_raise(Parsers::Errors::FailFastError.new('test error'))
       end
-      let (:options) { {silent: false, output: nil, fail_fast: false, input_format: 'log', output_format: 'log'} }
+      let (:options) { {silent: false, output: "undefined", fail_fast: false, input_format: 'log', output_format: 'log'} }
 
       it "stops processing and puts an error message to console" do
         expect_any_instance_of(Parsers::DefaultParser).to receive(:parse)
