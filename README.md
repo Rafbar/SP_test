@@ -34,4 +34,4 @@ Those are being unused due to time constraints but here to show the logic and in
 1. I exceeded the intended 2.5hours by a margin of 1-1.5h (realised a bit late and was to deep to simplify the solution at that point)
 2. The script doesn't take into consideration memory optimisation (and is as such quite memory hungry if executed on extra large files)
 3. The Csv loggers/parsers were intended to be implemented but due to time constraints i did not finish them. I decided to leave them be to show the logic behind the approach and class/module separation.
-
+4. The URL and IP validations are simplistic and definately not "production ready" by any stretch of the imagination. Originally i intended to include some proper validators but since the included file didn't have real ips i decided on a simplified approach that aligns with what was provided in the webserver.log file.
