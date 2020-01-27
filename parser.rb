@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require './lib/parsers/errors/fail_fast_error'
+
 require './lib/parsers/parser'
 require './lib/parsers/default_parser'
 require './lib/parsers/csv_parser'

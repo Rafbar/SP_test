@@ -12,6 +12,7 @@ module Processors
 
     def initialize(options)
       @options = options
+      @processor_result = {}
     end
 
     [:input, :output].each do |method_name|
@@ -32,8 +33,8 @@ module Processors
       @options[:fail_fast]
     end
 
-    def stoud_logger
-      @stoud_logger ||= ::Loggers::StdoutLogger.new unless silent?
+    def stdout_logger
+      @stdoud_logger ||= ::Loggers::StdoutLogger.new unless silent?
     end
 
     def output_logger
@@ -42,6 +43,23 @@ module Processors
 
     def input_parser
       @input_parser ||= INPUT_FORMAT_MAP[@options[:input_format]].new(input: input, fail_fast: fail_fast?)
+    end
+
+    def run
+      begin
+        parsed_input = input_parser.parse
+        process_input
+        log_output
+      rescue ::Parsers::Errors::FailFastError => e
+        puts "Parser failed fast on #{e.message}"
+      end
+    end
+
+    def process_input; end
+
+    def log_output
+      output_logger.log(@processor_result) if output_logger
+      stdout_logger.log(@processor_result) if stdout_logger
     end
   end
 end

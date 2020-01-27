@@ -1,5 +1,7 @@
 require 'pry'
 
+require 'parsers/errors/fail_fast_error'
+
 require 'parsers/parser'
 require 'parsers/default_parser'
 require 'parsers/csv_parser'
